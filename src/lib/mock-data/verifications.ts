@@ -1,0 +1,41 @@
+import type { VerificationRequest } from '@/types'
+
+export const mockVerifications: VerificationRequest[] = [
+  {
+    id: 'verif-001',
+    sellerId: 'seller-002',
+    businessName: 'Auto Parts Νίκαια',
+    afm: '987654321',
+    doy: 'ΔΟΥ Πειραιά',
+    phone: '2104449876',
+    address: 'Οδός Πειραιώς 210, Νίκαια 18450',
+    status: 'pending',
+    submittedAt: '2026-01-16T09:00:00Z',
+  },
+  {
+    id: 'verif-002',
+    sellerId: 'seller-004',
+    businessName: 'Ανακυκλώσεις Αττικής',
+    afm: '112233445',
+    doy: 'ΔΟΥ Γαλατσίου',
+    phone: '2102225566',
+    address: 'Λένορμαν 134, Αθήνα 10443',
+    website: 'https://anakyklosis-attikis.gr',
+    status: 'submitted',
+    submittedAt: '2026-04-20T14:00:00Z',
+  },
+  {
+    id: 'verif-003',
+    sellerId: 'seller-001',
+    businessName: 'Μάντρα Παπαδόπουλος',
+    afm: '123456789',
+    doy: 'ΔΟΥ Αιγάλεω',
+    phone: '2105551234',
+    address: 'Λεωφόρος Αθηνών 45, Αιγάλεω 12241',
+    website: 'https://mantrapap.gr',
+    status: 'approved',
+    submittedAt: '2025-09-28T10:00:00Z',
+    reviewedAt: '2025-10-01T09:00:00Z',
+    reviewNote: 'Τα στοιχεία επαληθεύτηκαν. Εγκρίθηκε.',
+  },
+]

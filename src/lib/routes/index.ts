@@ -1,0 +1,44 @@
+export const ROUTES = {
+  HOME: '/',
+  MARKETPLACE: '/marketplace',
+  PART_DETAIL: (partId: string) => `/marketplace/${partId}`,
+  LOGIN: '/login',
+  REGISTER: '/register',
+  VERIFY_BUSINESS: '/verify-business',
+
+  SELLER: {
+    DASHBOARD: '/seller',
+    MOBILE: '/seller/mobile',
+    INVENTORY: '/seller/inventory',
+    INVENTORY_ADD: '/seller/inventory/add',
+    INVENTORY_VIN_IMPORT: '/seller/inventory/vin-import',
+    INVENTORY_SCAN: '/seller/inventory/scan',
+    PART_DETAIL: (partId: string) => `/seller/inventory/${partId}`,
+    ORDERS: '/seller/orders',
+    ORDER_DETAIL: (orderId: string) => `/seller/orders/${orderId}`,
+    CHATS: '/seller/chats',
+    SETTINGS: '/seller/settings',
+  },
+
+  BUYER: {
+    DASHBOARD: '/buyer',
+    MARKETPLACE: '/buyer/marketplace',
+    VIN_SEARCH: '/buyer/vin-search',
+    ORDERS: '/buyer/orders',
+    ORDER_DETAIL: (orderId: string) => `/buyer/orders/${orderId}`,
+    CHATS: '/buyer/chats',
+    PROFILE: '/buyer/profile',
+  },
+
+  ADMIN: {
+    DASHBOARD: '/admin',
+    VERIFICATIONS: '/admin/verifications',
+    USERS: '/admin/users',
+    SELLERS: '/admin/sellers',
+    BUYERS: '/admin/buyers',
+    LISTINGS: '/admin/listings',
+    ORDERS: '/admin/orders',
+    DISPUTES: '/admin/disputes',
+    REPORTS: '/admin/reports',
+  },
+} as const
