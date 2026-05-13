@@ -27,7 +27,7 @@ const BUYER_NAV: NavItem[] = [
     ),
   },
   {
-    label: 'Παραγγελίες',
+    label: 'Αιτήματα',
     href: '/buyer/orders',
     icon: (
       <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
@@ -80,7 +80,7 @@ const BUYER_MOBILE_NAV: MobileNavItem[] = [
     ),
   },
   {
-    label: 'Παραγγελίες',
+    label: 'Αιτήματα',
     href: '/buyer/orders',
     icon: (
       <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
@@ -113,14 +113,14 @@ const PAGE_TITLES: Record<string, string> = {
   '/buyer': 'Αρχική',
   '/buyer/marketplace': 'Αγορά',
   '/buyer/vin-search': 'Αναζήτηση VIN',
-  '/buyer/orders': 'Παραγγελίες',
+  '/buyer/orders': 'Αιτήματα',
   '/buyer/chats': 'Μηνύματα',
   '/buyer/profile': 'Προφίλ μου',
 }
 
 function getTitle(pathname: string): string {
   if (PAGE_TITLES[pathname]) return PAGE_TITLES[pathname]
-  if (pathname.startsWith('/buyer/orders/')) return 'Παραγγελία'
+  if (pathname.startsWith('/buyer/orders/')) return 'Αίτημα'
   if (pathname.startsWith('/buyer/marketplace/')) return 'Ανταλλακτικό'
   return 'Partlink'
 }

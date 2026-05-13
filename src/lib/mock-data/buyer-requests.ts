@@ -12,6 +12,7 @@ export interface BuyerRequest {
   partSku: string
   partPrice: number        // 0 = on_request / needs_price
   donorVehicle?: string    // e.g. "BMW E90 320d 2007"
+  sellerName?: string      // display name of the seller
   // Buyer profile
   buyerCompany: string
   buyerContact?: string
@@ -39,6 +40,7 @@ export const mockBuyerRequests: BuyerRequest[] = [
     partSku: 'PL-001-0001',
     partPrice: 450,
     donorVehicle: 'BMW E90 320d 2007',
+    sellerName: 'Μάντρα Παπαδόπουλος',
     buyerCompany: 'Papadopoulos Auto Parts',
     buyerContact: 'Γιώργος Παπαδόπουλος',
     buyerPhone: '69 0000 0000',
@@ -58,6 +60,7 @@ export const mockBuyerRequests: BuyerRequest[] = [
     partSku: 'PL-001-0005',
     partPrice: 1100,
     donorVehicle: 'BMW E90 320d 2007',
+    sellerName: 'Μάντρα Παπαδόπουλος',
     buyerCompany: 'Συνεργείο Κωνσταντίνου',
     buyerContact: 'Κωνσταντίνος Νικολάου',
     buyerPhone: '69 1111 2222',
@@ -77,6 +80,7 @@ export const mockBuyerRequests: BuyerRequest[] = [
     partSku: 'PL-001-2001',
     partPrice: 0,
     donorVehicle: 'Opel Astra 2010',
+    sellerName: 'Μάντρα Παπαδόπουλος',
     buyerCompany: 'AutoFix Βούλα',
     buyerContact: 'Δήμος Αλεξίου',
     buyerPhone: '69 3333 4444',
@@ -96,6 +100,7 @@ export const mockBuyerRequests: BuyerRequest[] = [
     partSku: 'PL-001-0002',
     partPrice: 95,
     donorVehicle: 'Mercedes-Benz C220 CDI W204 2010',
+    sellerName: 'Μάντρα Παπαδόπουλος',
     buyerCompany: 'Ανδρέου Service',
     buyerContact: 'Ανδρέας Ανδρέου',
     buyerPhone: '69 5555 6666',
@@ -105,6 +110,10 @@ export const mockBuyerRequests: BuyerRequest[] = [
     delivery: 'shipping',
     status: 'in_progress',
     createdAt: '2026-05-10T16:45:00Z',
+    priceSent: 95,
+    priceSentAt: '2026-05-10T18:20:00Z',
+    replyNote: 'Διαθέσιμο. Αποστολή σε 2-3 εργάσιμες μέρες με ACS.',
+    replyNoteAt: '2026-05-10T18:22:00Z',
   },
 
   // ── Ολοκληρωμένο: seller marked unavailable ───────────────────────────────────
@@ -115,6 +124,7 @@ export const mockBuyerRequests: BuyerRequest[] = [
     partSku: 'PL-001-0003',
     partPrice: 320,
     donorVehicle: 'VW Golf 5 1.9 TDI 2005',
+    sellerName: 'Μάντρα Παπαδόπουλος',
     buyerCompany: 'Papadopoulos Auto Parts',
     buyerContact: 'Γιώργος Παπαδόπουλος',
     buyerPhone: '69 0000 0000',
@@ -134,6 +144,7 @@ export const mockBuyerRequests: BuyerRequest[] = [
     partSku: 'PL-001-0004',
     partPrice: 0,
     donorVehicle: 'Opel Astra H 1.6 2005',
+    sellerName: 'Μάντρα Παπαδόπουλος',
     buyerCompany: 'Γαλλάκης Service',
     buyerContact: 'Μιχάλης Γαλλάκης',
     buyerPhone: '69 7777 8888',
