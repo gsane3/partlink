@@ -14,6 +14,7 @@ export const ROUTES = {
     INVENTORY_VIN_IMPORT: '/seller/inventory/vin-import',
     INVENTORY_SCAN: '/seller/inventory/scan',
     PART_DETAIL: (partId: string) => `/seller/inventory/${partId}`,
+    VEHICLE_DETAIL: (vehicleCode: string) => `/seller/inventory/vehicles/${vehicleCode}`,
     ORDERS: '/seller/orders',
     ORDER_DETAIL: (orderId: string) => `/seller/orders/${orderId}`,
     CHATS: '/seller/chats',
