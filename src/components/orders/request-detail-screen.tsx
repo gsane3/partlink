@@ -147,9 +147,10 @@ function RequestDetailContent({ request }: { request: BuyerRequest }) {
   const allEvents   = [...buildBaseActivityEvents(request), ...localEvents]
   const allMessages = [...buildBaseRequestMessages(request), ...localMessages]
 
-  // Primary CTA for sticky bar
-  const primaryCta = status === 'needs_price' ? 'Αποστολή τιμής' : 'Απάντηση'
-  const primaryAction = () => openPanel(status === 'needs_price' ? 'price' : 'reply')
+  // Primary CTA: show "Αποστολή τιμής" only when no price has been sent yet and status needs it
+  const needsPriceAction = priceSent === undefined && status === 'needs_price'
+  const primaryCta    = needsPriceAction ? 'Αποστολή τιμής' : 'Απάντηση'
+  const primaryAction = () => openPanel(needsPriceAction ? 'price' : 'reply')
 
   return (
     <>
@@ -209,7 +210,47 @@ function RequestDetailContent({ request }: { request: BuyerRequest }) {
               </div>
             </InfoCard>
 
-            {/* B. Buyer card */}
+            {/* B. Sent-price confirmation card */}
+            {priceSent !== undefined && (
+              <div className="bg-white border border-blue-200 rounded-xl overflow-hidden">
+                <div className="px-4 py-3 bg-blue-50 border-b border-blue-100 flex items-center gap-2">
+                  <svg className="w-4 h-4 text-blue-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <p className="text-sm font-semibold text-blue-900">Η τιμή στάλθηκε</p>
+                </div>
+                <div className="px-4 py-4">
+                  <p className="text-sm text-slate-600 mb-3">
+                    Ο αγοραστής θα δει την τιμή και μπορεί να την αποδεχτεί για το επόμενο βήμα.
+                  </p>
+                  <div className="space-y-0">
+                    <InfoRow label="Ανταλλακτικό">{request.partName}</InfoRow>
+                    <InfoRow label="Τιμή που στάλθηκε">
+                      <span className="font-bold text-blue-700">{formatPrice(priceSent)}</span>
+                    </InfoRow>
+                    <InfoRow label="Αγοραστής">{request.buyerCompany}</InfoRow>
+                    <InfoRow label="Παραλαβή">{DELIVERY_PREFERENCE_LABELS[request.delivery]}</InfoRow>
+                  </div>
+                  {request.delivery === 'shipping' && (
+                    <p className="text-xs text-slate-600 border-t border-slate-100 mt-3 pt-3">
+                      Ο αγοραστής έχει δηλώσει αποστολή.
+                    </p>
+                  )}
+                  {request.delivery === 'pickup' && (
+                    <p className="text-xs text-slate-600 border-t border-slate-100 mt-3 pt-3">
+                      Ο αγοραστής προτιμά παραλαβή από κατάστημα.
+                    </p>
+                  )}
+                  {request.delivery === 'unknown' && (
+                    <p className="text-xs text-slate-600 border-t border-slate-100 mt-3 pt-3">
+                      Ο τρόπος παραλαβής θα συμφωνηθεί με τον αγοραστή.
+                    </p>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* C. Buyer card */}
             <InfoCard title="Αγοραστής">
               <div className="space-y-1.5">
                 <p className="text-sm font-semibold text-slate-900">{request.buyerCompany}</p>
@@ -222,20 +263,8 @@ function RequestDetailContent({ request }: { request: BuyerRequest }) {
               </div>
             </InfoCard>
 
-            {/* C. Message thread */}
+            {/* D. Message thread */}
             <RequestMessageThread messages={allMessages} perspective="seller" />
-
-            {/* Price sent */}
-            {priceSent && (
-              <div className="flex items-center gap-2.5 bg-green-50 border border-green-200 rounded-xl px-4 py-3.5">
-                <svg className="w-4 h-4 text-green-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                </svg>
-                <p className="text-sm font-semibold text-green-800">
-                  Τιμή που στάλθηκε: {formatPrice(priceSent)}
-                </p>
-              </div>
-            )}
 
             {/* D. Compatibility warning */}
             <div className="flex items-start gap-2.5 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3.5">
