@@ -11,7 +11,7 @@ import { cn, formatDate, formatPrice } from '@/lib/utils'
 import { ROUTES } from '@/lib/routes'
 import { getBuyerRequests } from '@/lib/mock-data/buyer-requests'
 import type { BuyerRequest } from '@/lib/mock-data/buyer-requests'
-import { BUYER_STATUS_CONFIG } from '@/lib/requests/status'
+import { BUYER_STATUS_CONFIG, getBuyerRequestHint } from '@/lib/requests/status'
 import { DELIVERY_PREFERENCE_LABELS } from '@/lib/requests/delivery'
 
 // ─── Constants ────────────────────────────────────────────────────────────────
@@ -111,6 +111,16 @@ function BuyerRequestCard({
 
         {/* Buyer message preview */}
         <p className="text-xs text-slate-500 italic line-clamp-1">&ldquo;{req.message}&rdquo;</p>
+
+        {/* Lifecycle hint */}
+        <p className={cn(
+          'text-xs mt-1',
+          req.priceSent !== undefined && req.status !== 'completed'
+            ? 'font-medium text-green-700'
+            : req.status === 'completed' ? 'text-slate-400' : 'text-slate-500'
+        )}>
+          {getBuyerRequestHint(req)}
+        </p>
       </div>
 
       {/* Action row */}

@@ -12,7 +12,7 @@ import { cn, formatDate, formatPrice } from '@/lib/utils'
 import { ROUTES } from '@/lib/routes'
 import { mockBuyerRequests } from '@/lib/mock-data/buyer-requests'
 import type { BuyerRequest, RequestStatus } from '@/lib/mock-data/buyer-requests'
-import { SELLER_STATUS_CONFIG } from '@/lib/requests/status'
+import { SELLER_STATUS_CONFIG, getSellerRequestHint } from '@/lib/requests/status'
 import { DELIVERY_PREFERENCE_LABELS } from '@/lib/requests/delivery'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -120,8 +120,17 @@ function RequestCard({
           <span className="text-slate-200">·</span>
           <span className="text-xs text-slate-400">{DELIVERY_PREFERENCE_LABELS[req.delivery]}</span>
         </div>
+        <p className={cn(
+          'text-xs mt-1',
+          req.status === 'needs_price' ? 'font-medium text-amber-700' :
+          req.priceSent !== undefined ? 'text-blue-600' :
+          req.status === 'completed' ? 'text-slate-400' :
+          'text-slate-600'
+        )}>
+          {getSellerRequestHint(req)}
+        </p>
         {req.message && (
-          <p className="text-xs text-slate-500 mt-1.5 line-clamp-1 italic">&ldquo;{req.message}&rdquo;</p>
+          <p className="text-xs text-slate-500 mt-1 line-clamp-1 italic">&ldquo;{req.message}&rdquo;</p>
         )}
       </button>
 

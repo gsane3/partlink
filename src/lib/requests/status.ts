@@ -38,6 +38,26 @@ export function getBuyerRequestVariant(status: RequestStatus): BadgeVariant {
   return BUYER_STATUS_CONFIG[status].variant
 }
 
+// ─── Lifecycle hint helpers ───────────────────────────────────────────────────
+
+export function getSellerRequestHint(req: BuyerRequest): string {
+  if (req.status === 'completed')                       return 'Ολοκληρώθηκε στο demo'
+  if (req.status === 'new')                             return 'Νέο αίτημα από αγοραστή'
+  if (req.status === 'needs_price')                     return 'Στείλε τιμή για να προχωρήσει'
+  if (req.priceSent !== undefined)                      return 'Περιμένει απάντηση αγοραστή'
+  if (req.replyNote)                                    return 'Συζήτηση σε εξέλιξη'
+  return 'Σε εξέλιξη'
+}
+
+export function getBuyerRequestHint(req: BuyerRequest): string {
+  if (req.status === 'completed')                       return 'Ολοκληρώθηκε στο demo'
+  if (req.status === 'new')                             return 'Περιμένει απάντηση πωλητή'
+  if (req.status === 'needs_price')                     return 'Περιμένει τιμή από πωλητή'
+  if (req.priceSent !== undefined)                      return 'Μπορείς να αποδεχτείς την τιμή'
+  if (req.replyNote)                                    return 'Ο πωλητής απάντησε'
+  return 'Σε εξέλιξη'
+}
+
 // ─── Request state helpers ────────────────────────────────────────────────────
 
 export function isRequestWaitingPrice(req: BuyerRequest): boolean {
