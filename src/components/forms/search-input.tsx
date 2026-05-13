@@ -7,7 +7,7 @@ interface SearchInputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
   ({ className, onClear, value, ...props }, ref) => (
-    <div className="relative">
+    <div className={cn('relative h-10', className)}>
       <svg
         className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none"
         fill="none"
@@ -27,11 +27,10 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
         type="search"
         value={value}
         className={cn(
-          'w-full h-10 pl-9 pr-9 text-sm bg-white border border-slate-200 rounded-lg',
+          'w-full h-full pl-9 pr-9 text-sm bg-white border border-slate-200 rounded-lg',
           'text-slate-900 placeholder:text-slate-400',
           'focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent',
-          '[&::-webkit-search-cancel-button]:hidden',
-          className
+          '[&::-webkit-search-cancel-button]:hidden'
         )}
         {...props}
       />

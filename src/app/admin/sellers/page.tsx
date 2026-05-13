@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { Badge } from '@/components/ui/badge'
 import { FilterChip } from '@/components/forms/filter-chip'
+import { SearchInput } from '@/components/forms/search-input'
 import { PageContainer } from '@/components/layout/page-container'
 import { SectionHeader } from '@/components/layout/section-header'
 import { DashboardGrid } from '@/components/layout/dashboard-grid'
@@ -106,8 +107,8 @@ function SellerCard({ seller }: { seller: SellerItem }) {
       <div className="grid grid-cols-5 gap-2 mb-3 text-center">
         <StatItem label="Σύνολο"        value={seller.requestCount}    accent="text-slate-700" />
         <StatItem label="Ενεργά"        value={seller.activeCount}     accent={seller.activeCount > 0 ? 'text-blue-600' : 'text-slate-500'} />
-        <StatItem label="Τιμή;"         value={seller.needsPriceCount} accent={seller.needsPriceCount > 0 ? 'text-amber-600' : 'text-slate-500'} />
-        <StatItem label="Τιμή ✓"        value={seller.priceSentCount}  accent={seller.priceSentCount > 0 ? 'text-blue-600' : 'text-slate-500'} />
+        <StatItem label="Αναμονή"         value={seller.needsPriceCount} accent={seller.needsPriceCount > 0 ? 'text-amber-600' : 'text-slate-500'} />
+        <StatItem label="Με τιμή"           value={seller.priceSentCount}  accent={seller.priceSentCount > 0 ? 'text-blue-600' : 'text-slate-500'} />
         <StatItem label="Demo"          value={seller.completedCount}  accent={seller.completedCount > 0 ? 'text-green-600' : 'text-slate-500'} />
       </div>
 
@@ -129,8 +130,14 @@ function SellerCard({ seller }: { seller: SellerItem }) {
 
 export default function AdminSellersPage() {
   const [activeFilter, setActiveFilter] = useState<SellerFilter>('all')
+  const [search, setSearch] = useState('')
 
-  const filtered = allSellers.filter((s) => matchesFilter(s, activeFilter))
+  const filtered = allSellers
+    .filter((s) => matchesFilter(s, activeFilter))
+    .filter((s) => {
+      if (!search.trim()) return true
+      return s.name.toLowerCase().includes(search.toLowerCase())
+    })
 
   return (
     <PageContainer className="pb-10">
@@ -146,16 +153,25 @@ export default function AdminSellersPage() {
         <MetricCard label="Τιμή στάλθηκε"   value={priceSentTotal} />
       </DashboardGrid>
 
-      <div className="flex gap-1.5 overflow-x-auto pb-0.5 mb-5 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-        {FILTER_OPTIONS.map((opt) => (
-          <FilterChip
-            key={opt.value}
-            label={opt.label}
-            selected={activeFilter === opt.value}
-            onClick={() => setActiveFilter(opt.value)}
-          />
-        ))}
+      <div className="overflow-x-auto pb-0.5 mb-3 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+        <div className="flex gap-1.5 min-w-max pr-4">
+          {FILTER_OPTIONS.map((opt) => (
+            <FilterChip
+              key={opt.value}
+              label={opt.label}
+              selected={activeFilter === opt.value}
+              onClick={() => setActiveFilter(opt.value)}
+            />
+          ))}
+        </div>
       </div>
+      <SearchInput
+        placeholder="Αναζήτηση πωλητή..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        onClear={() => setSearch('')}
+        className="mb-5"
+      />
 
       <p className="text-xs text-slate-500 mb-3">
         {filtered.length === totalCount
@@ -165,7 +181,7 @@ export default function AdminSellersPage() {
 
       {filtered.length === 0 ? (
         <div className="bg-white border border-dashed border-slate-300 rounded-xl py-14 text-center">
-          <p className="text-sm font-medium text-slate-600">Δεν υπάρχουν πωλητές</p>
+          <p className="text-sm font-medium text-slate-600">Δεν βρέθηκαν πωλητές</p>
         </div>
       ) : (
         <div className="space-y-3">
