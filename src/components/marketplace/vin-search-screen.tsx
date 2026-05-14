@@ -240,7 +240,7 @@ export function VinSearchScreen() {
           <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
         </svg>
         <div>
-          <p className="text-xs font-semibold text-amber-900 mb-0.5">Πριν αγοράσεις</p>
+          <p className="text-xs font-semibold text-amber-900 mb-0.5">Συμβατότητα</p>
           <p className="text-xs text-amber-800 leading-relaxed">
             Η συμβατότητα πρέπει να επιβεβαιώνεται με OEM, VIN ή τον πωλητή πριν την αγορά.
           </p>
@@ -450,7 +450,7 @@ export function VinSearchScreen() {
                   className="inline-flex items-center gap-2 h-11 px-6 rounded-xl border border-slate-200 text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors"
                 >
                   <svg className="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                   </svg>
                   Δες όλα στο Marketplace
                 </Link>

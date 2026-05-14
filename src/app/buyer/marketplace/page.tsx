@@ -8,7 +8,7 @@ export default function BuyerMarketplacePage() {
   return (
     <PageContainer>
       <SectionHeader
-        title="Αγορά"
+        title="Marketplace ανταλλακτικών"
         subtitle={`${count} διαθέσιμα ανταλλακτικά`}
       />
       <MarketplaceList />
