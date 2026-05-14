@@ -12,6 +12,7 @@ import { findPartDetail } from '@/lib/mock-data/part-detail'
 import { mockParts } from '@/lib/mock-data/parts'
 import { mockSellers } from '@/lib/mock-data/sellers'
 import { RequestSheet } from './request-sheet'
+import { PartPhotoPlaceholder } from '@/components/ui/part-photo-placeholder'
 import type { CompatibilityStatus } from '@/components/inventory/vin-import/types'
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -165,17 +166,11 @@ export function MarketplaceDetail({ partId }: { partId: string }) {
         {/* ── Hero ── */}
         <div className="bg-white border border-slate-200 rounded-xl overflow-hidden mb-4">
           {/* Photo area */}
-          <div
-            className="w-full bg-slate-100 flex items-center justify-center"
+          <PartPhotoPlaceholder
+            categoryId={partInfo.categoryId}
+            className="w-full"
             style={{ aspectRatio: '16/9' }}
-          >
-            <div className="text-center">
-              <svg className="w-14 h-14 text-slate-300 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-              <p className="text-xs text-slate-400">Φωτογραφία μη διαθέσιμη</p>
-            </div>
-          </div>
+          />
 
           {/* Title + price */}
           <div className="px-5 pt-4 pb-5">
